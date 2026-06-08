@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Excluir Conta — Voz da Comunidade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --verde: #1a9e5c;
+      --verde-escuro: #0f6e3f;
+      --verde-claro: #d4f0e3;
+      --vermelho: #e03c31;
+      --vermelho-claro: #fdecea;
+      --cinza: #f5f6f8;
+      --texto: #1a1f2e;
+      --subtexto: #5a6276;
+      --borda: #e0e4ed;
+      --branco: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--cinza);
+      color: var(--texto);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--verde-escuro);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    }
+
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--verde);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+
+    header h1 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+
+    header span {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+      margin-left: 2px;
+    }
+
+    /* MAIN */
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* ALERTA VERMELHO */
+    .alerta {
+      background: var(--vermelho-claro);
+      border: 1.5px solid #f5b8b4;
+      border-radius: 14px;
+      padding: 18px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 32px;
+    }
+
+    .alerta-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .alerta h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--vermelho);
+      margin-bottom: 5px;
+    }
+
+    .alerta p {
+      font-size: 13.5px;
+      color: #7a2020;
+      line-height: 1.55;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--branco);
+      border-radius: 18px;
+      border: 1.5px solid var(--borda);
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+    }
+
+    .card-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1.5px solid var(--borda);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-header-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .icon-verde { background: var(--verde-claro); }
+    .icon-azul { background: #dde9ff; }
+    .icon-amarelo { background: #fff4d4; }
+
+    .card-header h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--texto);
+    }
+
+    .card-header p {
+      font-size: 12.5px;
+      color: var(--subtexto);
+      margin-top: 2px;
+    }
+
+    .card-body {
+      padding: 20px 24px;
+    }
+
+    /* LISTA DE DADOS */
+    .dados-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .dado-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--cinza);
+      border-radius: 10px;
+      font-size: 13.5px;
+    }
+
+    .dado-item .tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      background: var(--verde-claro);
+      color: var(--verde-escuro);
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .dado-item .tag.red {
+      background: var(--vermelho-claro);
+      color: var(--vermelho);
+    }
+
+    /* PASSOS */
+    .passos {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .passo {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .passo-num {
+      width: 28px; height: 28px;
+      background: var(--verde-escuro);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .passo-texto strong {
+      font-size: 14px;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .passo-texto p {
+      font-size: 13px;
+      color: var(--subtexto);
+      line-height: 1.5;
+    }
+
+    /* BOTÃO EMAIL */
+    .btn-email {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 15px;
+      background: var(--verde-escuro);
+      color: #fff;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-email:hover {
+      background: #0a4f2c;
+      transform: translateY(-1px);
+    }
+
+    .btn-email:active {
+      transform: translateY(0);
+    }
+
+    /* INFO BOX */
+    .info-box {
+      background: #eef4ff;
+      border: 1.5px solid #c5d8ff;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: #2a4a8a;
+      line-height: 1.55;
+      margin-top: 16px;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13.5px;
+    }
+
+    /* PRAZO */
+    .prazo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .prazo-item {
+      background: var(--cinza);
+      border-radius: 12px;
+      padding: 14px 16px;
+      text-align: center;
+    }
+
+    .prazo-item .valor {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--verde-escuro);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .prazo-item .label {
+      font-size: 12px;
+      color: var(--subtexto);
+      margin-top: 4px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 12px;
+      color: var(--subtexto);
+      border-top: 1.5px solid var(--borda);
+      margin-top: 16px;
+    }
+
+    footer a {
+      color: var(--verde-escuro);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 480px) {
+      .prazo-grid { grid-template-columns: 1fr; }
+      main { padding: 24px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-icon">🗣️</div>
+  <div>
+    <h1>Voz da Comunidade <span>/ Horizonte-CE</span></h1>
+  </div>
+</header>
+
+<main>
+
+  <!-- ALERTA -->
+  <div class="alerta">
+    <div class="alerta-icon">⚠️</div>
+    <div>
+      <h2>Ação irreversível</h2>
+      <p>A exclusão da sua conta é permanente. Todos os seus dados e relatos enviados serão removidos dos nossos servidores e não poderão ser recuperados.</p>
+    </div>
+  </div>
+
+  <!-- DADOS QUE SERÃO EXCLUÍDOS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon icon-vermelho" style="background:#fdecea;">🗑️</div>
+      <div>
+        <h3>Dados que serão excluídos</h3>
+        <p>Tudo vinculado à sua conta será removido</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="dados-lista">
+        <div class="dado-item">👤 Nome completo e e-mail de cadastro <span class="tag red">Excluído</span></div>
+        <div class="dado-item">📍 Histórico de localização e relatos <span class="tag red">Excluído</span></div>
+        <div class="dado-item">📷 Fotos enviadas nos relatos <span class="tag red">Excluído</span></div>
+        <div class="dado-item">💬 Comentários e interações <span class="tag red">Excluído</span></div>
+        <div class="dado-item">🔐 Credenciais de acesso <span class="tag red">Excluído</span></div>
+      </div>
+      <div class="info-box" style="margin-top:16px;">
+        <strong>📌 Dados anonimizados mantidos</strong>
+        Relatos já analisados pela administração pública podem ser mantidos de forma <strong>anonimizada</strong> para fins estatísticos e de gestão urbana, conforme previsto na LGPD (Art. 7º, III).
+      </div>
+    </div>
+  </div>
+
+  <!-- COMO SOLICITAR -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon icon-verde">📧</div>
+      <div>
+        <h3>Como solicitar a exclusão</h3>
+        <p>Envie um e-mail com os dados abaixo</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="passos">
+        <div class="passo">
+          <div class="passo-num">1</div>
+          <div class="passo-texto">
+            <strong>Prepare o e-mail de solicitação</strong>
+            <p>Clique no botão abaixo. Um e-mail pré-preenchido será aberto automaticamente.</p>
+          </div>
+        </div>
+        <div class="passo">
+          <div class="passo-num">2</div>
+          <div class="passo-texto">
+            <strong>Confirme sua identidade</strong>
+            <p>Inclua no e-mail o endereço cadastrado no app e seu nome completo para verificação.</p>
+          </div>
+        </div>
+        <div class="passo">
+          <div class="passo-num">3</div>
+          <div class="passo-texto">
+            <strong>Aguarde a confirmação</strong>
+            <p>Você receberá um e-mail confirmando a exclusão dentro do prazo legal.</p>
+          </div>
+        </div>
+      </div>
+
+      <a class="btn-email"
+         href="mailto:contato@vozdacomunidade.horizonte.ce.gov.br?subject=Solicitação%20de%20Exclusão%20de%20Conta%20—%20Voz%20da%20Comunidade&body=Olá,%0A%0ASolicito%20a%20exclusão%20completa%20da%20minha%20conta%20e%20de%20todos%20os%20meus%20dados%20pessoais%20do%20aplicativo%20Voz%20da%20Comunidade.%0A%0ANome%20completo%3A%20%0AE-mail%20cadastrado%20no%20app%3A%20%0A%0AAtenciosamente.">
+        ✉️ Enviar solicitação por e-mail
+      </a>
+    </div>
+  </div>
+
+  <!-- PRAZOS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon icon-azul">⏱️</div>
+      <div>
+        <h3>Prazos (LGPD)</h3>
+        <p>Conforme a Lei Geral de Proteção de Dados</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="prazo-grid">
+        <div class="prazo-item">
+          <div class="valor">48h</div>
+          <div class="label">Confirmação de recebimento</div>
+        </div>
+        <div class="prazo-item">
+          <div class="valor">15</div>
+          <div class="label">Dias úteis para exclusão</div>
+        </div>
+      </div>
+      <div class="info-box">
+        <strong>⚖️ Seus direitos pela LGPD</strong>
+        Você tem direito à exclusão, portabilidade, correção e acesso aos seus dados a qualquer momento, conforme a Lei nº 13.709/2018.
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>Voz da Comunidade · Prefeitura de Horizonte/CE · OBT</p>
+  <p style="margin-top:6px;">
+    <a href="./privacy-policy.html">Política de Privacidade</a>
+    &nbsp;·&nbsp;
+    Dúvidas? <a href="mailto:contato@vozdacomunidade.horizonte.ce.gov.br">contato@vozdacomunidade.horizonte.ce.gov.br</a>
+  </p>
+</footer>
+
+</body>
+</html>
